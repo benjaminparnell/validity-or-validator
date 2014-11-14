@@ -26,7 +26,7 @@ var schema = schemata(
       }
     , callToActionLink:
       { type: String
-      , validators: { all: [ or(validity.url, validateMailTo) ] }
+      , validators: { all: [ or(validity.url, validateMailTo()) ] }
       }
     })
 
