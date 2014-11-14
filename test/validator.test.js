@@ -22,6 +22,7 @@ describe('or validator', function () {
     var obj = { email: 'a' }
     or(validity.integer, validity.email)('email', 'email', obj, function (error, valid) {
       assert.notEqual(valid, undefined)
+      assert.equal(valid, 'email must be an integer or email must be a valid email address')
     })
   })
 
