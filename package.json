@@ -1,0 +1,27 @@
+{
+  "name": "validity-or-validator",
+  "version": "0.0.0",
+  "description": "validate that one or both given validators pass",
+  "main": "validator.js",
+  "scripts": {
+    "lint": "./node_modules/.bin/jshint .",
+    "checkStyle": "./node_modules/.bin/jscs .",
+    "pretest": "npm run-script lint && npm run-script checkStyle",
+    "test": "./node_modules/.bin/istanbul cover ./node_modules/.bin/_mocha test",
+    "posttest": "./node_modules/.bin/istanbul check-coverage && rm -rf coverage",
+    "prepublish": "npm test && npm prune"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:benjaminparnell/validity-or-validator"
+  },
+  "author": "Ben Parnell <me@benparnell.com>",
+  "license": "ISC",
+  "devDependencies": {
+    "istanbul": "^0.3.2",
+    "jscs": "1.3.0",
+    "jshint": "^2.5.10",
+    "mocha": "^2.0.1",
+    "validity": "0.0.3"
+  }
+}
