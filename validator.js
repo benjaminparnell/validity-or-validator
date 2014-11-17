@@ -1,29 +1,39 @@
-module.exports = function (firstValidationFn, secondValidationFn) {
+var async = require('async')
 
-  return function (key, msg, object, callback) {
+module.exports = function (validationFns) {
+
+  return function (key, msg, object, done) {
     var result = false
       , errorMessage = ''
 
-    firstValidationFn(key, msg, object, function (error, valid) {
-      if (valid === undefined) {
-        result = true
-      } else {
-        errorMessage += valid + ' or '
-      }
+    if (!Array.isArray(validationFns)) {
+      return done(new Error('Requires an array of validators'))
+    }
 
-      secondValidationFn(key, msg, object, function (error, valid) {
-        if (valid === undefined) {
+    function runFn(fn, callback) {
+      fn.call(null, key, msg, object, function (error, valid) {
+        if (error) {
+          return callback(error)
+        } else if (valid === undefined) {
           result = true
+          return callback()
         } else {
           errorMessage += valid
-        }
-
-        if (result) {
-          return callback(null)
-        } else {
-          return callback(null, errorMessage)
+          if (validationFns.indexOf(fn) !== validationFns.length - 1) {
+            errorMessage += ' or '
+          }
+          return callback()
         }
       })
+    }
+
+    async.each(validationFns, runFn, function (error) {
+      if (error) {
+        return done(error)
+      } else if (result) {
+        return done(null)
+      }
+      return done(null, errorMessage)
     })
   }
 
