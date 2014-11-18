@@ -1,6 +1,6 @@
 {
   "name": "validity-or-validator",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "validate that one or both given validators pass",
   "main": "validator.js",
   "scripts": {
