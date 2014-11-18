@@ -28,10 +28,8 @@ module.exports = function (validationFns) {
     }
 
     async.each(validationFns, runFn, function (error) {
-      if (error) {
+      if (error || result) {
         return done(error)
-      } else if (result) {
-        return done(null)
       }
       return done(null, errorMessage)
     })
