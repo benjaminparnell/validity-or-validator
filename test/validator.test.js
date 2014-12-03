@@ -44,4 +44,12 @@ describe('or validator', function () {
     })
   })
 
+  it('should return a custom error message if passed one when both validators fail', function () {
+    var obj = { email: 'a' }
+    or([ validity.integer, validity.email ], 'Custom error message!')('email', 'email', obj, function (error, valid) {
+      assert.equal(error, null)
+      assert.equal(valid, 'Custom error message!')
+    })
+  })
+
 })

@@ -1,6 +1,6 @@
 var async = require('async')
 
-module.exports = function (validationFns) {
+module.exports = function (validationFns, customErrorMessage) {
 
   return function (key, msg, object, done) {
     var result = false
@@ -31,7 +31,7 @@ module.exports = function (validationFns) {
       if (error || result) {
         return done(error)
       }
-      return done(null, errorMessage)
+      return done(null, customErrorMessage || errorMessage)
     })
   }
 
