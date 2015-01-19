@@ -1,4 +1,4 @@
-# validity-or-validator
+# validity-or-validator [![Build Status](https://travis-ci.org/benjaminparnell/validity-or-validator.svg)](https://travis-ci.org/benjaminparnell/validity-or-validator)
 
 Validate that at least one validator in a group of validators passes.
 
